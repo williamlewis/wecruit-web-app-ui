@@ -1,0 +1,116 @@
+
+
+body {
+  font-family: karla;
+}
+
+h1, .h1 {
+  font-size: 8rem;
+  font-weight: bold;
+}
+
+h2, .h2 {
+  font-size: 2.75rem;
+  font-weight: bold;
+}
+
+h3, .h3 {
+  font-size: 1.75rem;
+}
+
+h4, .h4 {
+  font-size: 1.5rem;
+}
+
+h5, .h5 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-family: roboto mono;
+  text-indent: 2rem;
+}
+
+h6, .h6 {
+  font-size: 1.25rem;
+}
+
+
+.break-line {
+	width: 900px;
+	height: 0px;
+	border-bottom: 2px solid black;
+}
+
+/* Popover */
+.popover {
+  border: 2px solid #F05253;
+  font-family: karla;
+  font-size: 1.5rem;
+  max-width: 100%;
+}
+/* Popover Header 
+.popover-title {
+  background-color: #73AD21; 
+  color: #FFFFFF; 
+  font-size: 28px;
+  text-align:center;
+}
+/* Popover Body 
+.popover-content {
+  background-color: coral;
+  color: #F99C1C;
+  padding: 25px;
+  max-width: 800px;
+}
+/* Popover Arrow */
+.arrow {
+  border-right-color: #F05253 !important;
+}
+
+.btn-hover:hover {
+	background-color: #F05253;
+}
+
+.btn-candidate-title {
+  /*border: 2px solid #F05253;*/
+  border: 2px solid #F05253;
+  background-color: #FFF;
+  text-indent: -3rem;
+  /*color: #F05253;*/
+  /*font-weight: bold;*/
+}
+
+.input-landing {
+	width: 400px;
+}
+
+.tight-vertical {
+	margin-top: -17px;
+}
+
+.tight-vertical2 {
+  margin-top: -1px;
+}
+
+.multiselect-container {
+        width: 100% !important;
+}
+
+div.tooltip { 
+    position: absolute;     
+    text-align: center;     
+    width: 150px;          
+    height: 125px;         
+    padding: 2px;          
+    background: #FFF; 
+    border: 0px;    
+    border-radius: 8px;     
+    pointer-events: none;
+    border: 2px solid #F05253;
+    font-family: karla;
+    font-size: 1rem;    
+}
+
+.employee-buttons-styling {
+  padding-bottom: .5rem;
+  text-indent: 3rem;
+}

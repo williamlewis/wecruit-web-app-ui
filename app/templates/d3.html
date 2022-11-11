@@ -1,0 +1,347 @@
+<!-- Note:  All names and proprietary information have been redacted. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>d3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .links line {
+      stroke: #999;
+      stroke-opacity: 0.6;
+    }
+
+    .nodes circle {
+      stroke: #fff;
+      stroke-width: 1.5px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <svg width="960" height="600"></svg>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+  <script>
+    // SAMPLE DATA FOR LIVE DEMO ON TEMP SERVER
+    var jsondata = [
+      {
+        "department": "Interiors",
+        "id": "1000002279",
+        "location": "Chelsea",
+        "manager": "Manager A",
+        "score": 0.6643142287202757,
+        "time_at_company": "2.0",
+        "title": "Lead, Interior Design"
+      },
+      {
+        "department": "Architecture",
+        "id": "1000007351",
+        "location": "Chelsea",
+        "manager": "Manager B",
+        "score": 0.6643240502207888,
+        "time_at_company": "0.0",
+        "title": "Lead, Interior Design"
+      },
+      {
+        "department": "Interiors",
+        "id": "1000003815",
+        "location": "Chelsea",
+        "manager": "Manager A",
+        "score": 0.9164647091576728,
+        "time_at_company": "1.0",
+        "title": "Senior Interior Designer"
+      },
+      {
+        "department": "Interiors",
+        "id": "1000008181",
+        "location": "Chelsea",
+        "manager": "Manager C",
+        "score": 0.9164672707327455,
+        "time_at_company": "0.0",
+        "title": "Senior Interior Designer"
+      },
+      {
+        "department": "Interiors",
+        "id": "1000001101",
+        "location": "Chelsea",
+        "manager": "Manager D",
+        "score": 0.9164684050988375,
+        "time_at_company": "4.0",
+        "title": "Senior Interior Designer"
+      },
+      {
+        "department": "Creative",
+        "id": "1000006207",
+        "location": "Chelsea",
+        "manager": "Manager E",
+        "score": 0.9164711846340993,
+        "time_at_company": "0.0",
+        "title": "Senior Interior Designer"
+      },
+      {
+        "department": "Interiors",
+        "id": "1000006747",
+        "location": "Chelsea",
+        "manager": "Manager A",
+        "score": 0.9164717241338929,
+        "time_at_company": "0.0",
+        "title": "Senior Interior Designer"
+      },
+      {
+        "department": "Interiors",
+        "id": "1000008634",
+        "location": "Chelsea",
+        "manager": "Manager C",
+        "score": 0.9164758527560304,
+        "time_at_company": "0.0",
+        "title": "Senior Interior Design"
+      },
+      {
+        "department": "Creative",
+        "id": "1000004888",
+        "location": "Chelsea",
+        "manager": "Manager E",
+        "score": 0.9164759087758415,
+        "time_at_company": "1.0",
+        "title": "Senior Interior Designer"
+      },
+      {
+        "department": "Interiors",
+        "id": "1000004093",
+        "location": "Chelsea",
+        "manager": "Manager A",
+        "score": 0.9164768895138172,
+        "time_at_company": "1.0",
+        "title": "Senior Interior Designer"
+      },
+      {
+        "department": "Interiors",
+        "id": "1000005635",
+        "location": "Chelsea",
+        "manager": "Manager D",
+        "score": 0.9164772749021151,
+        "time_at_company": "0.0",
+        "title": "Senior Interior Designer"
+      },
+      {
+        "department": "Architecture",
+        "id": "1000011130",
+        "location": "Chelsea",
+        "manager": "Manager D",
+        "score": 0.9164784394250703,
+        "time_at_company": "0.0",
+        "title": "Senior Lead, Interior Design"
+      },
+      {
+        "department": "Creative",
+        "id": "1000002571",
+        "location": "Chelsea",
+        "manager": "Manager E",
+        "score": 0.9164806869493797,
+        "time_at_company": "2.0",
+        "title": "Senior Interior Designer"
+      },
+      {
+        "department": "Creative",
+        "id": "1000002601",
+        "location": "Chelsea",
+        "manager": "Manager E",
+        "score": 0.9164817649242624,
+        "time_at_company": "2.0",
+        "title": "Senior Interior Designer"
+      },
+      {
+        "department": "Interiors",
+        "id": "1000005841",
+        "location": "Chelsea",
+        "manager": "Manager A",
+        "score": 0.9164828418929768,
+        "time_at_company": "0.0",
+        "title": "Senior Interior Designer"
+      },
+      {
+        "department": "Interiors",
+        "id": "1000002975",
+        "location": "Chelsea",
+        "manager": "Manager C",
+        "score": 0.9164846610155131,
+        "time_at_company": "2.0",
+        "title": "Senior Interior Designer"
+      }
+    ]
+
+    var jsondata2 = [
+      {
+        "department": "Corporate Technology Services",
+        "id": "1000008236",
+        "location": "Chelsea",
+        "manager": "Manager V",
+        "score": 0.023793612759407848,
+        "time_at_company": "0.0",
+        "title": "Production Lead, Corporate Audio Visual Services"
+      },
+      {
+        "department": "Technology - Product Management",
+        "id": "1000002982",
+        "location": "Chelsea",
+        "manager": "Manager W",
+        "score": 0.028127551845799494,
+        "time_at_company": "2.0",
+        "title": "Senior Manager, Projects & Partnerships"
+      },
+      {
+        "department": "Corporate Technology Services",
+        "id": "1000008211",
+        "location": "Chelsea",
+        "manager": "Manager V",
+        "score": 0.030755044906874727,
+        "time_at_company": "0.0",
+        "title": "Senior Project Manager"
+      },
+      {
+        "department": "Corporate Technology Services",
+        "id": "1000010684",
+        "location": "Chelsea",
+        "manager": "Manager X",
+        "score": 0.048633482952705066,
+        "time_at_company": "0.0",
+        "title": "Senior Associate, Corporate Technology"
+      },
+      {
+        "department": "Technology - Program Management",
+        "id": "1000005224",
+        "location": "Chelsea",
+        "manager": "Manager Y",
+        "score": 0.061817419024484906,
+        "time_at_company": "1.0",
+        "title": "Lead, Product Support"
+      },
+      {
+        "department": "Technology - Program Management",
+        "id": "1000005581",
+        "location": "Chelsea",
+        "manager": "Manager Y",
+        "score": 0.062037407628176146,
+        "time_at_company": "0.0",
+        "title": "Lead, Product Support"
+      },
+      {
+        "department": "Technology - Program Management",
+        "id": "1000004871",
+        "location": "Chelsea",
+        "manager": "Manager Y",
+        "score": 0.06227365020718629,
+        "time_at_company": "1.0",
+        "title": "Lead, Product Support"
+      },
+      {
+        "department": "Technology - Program Management",
+        "id": "1000004882",
+        "location": "Chelsea",
+        "manager": "Manager Z",
+        "score": 0.08103931526910603,
+        "time_at_company": "1.0",
+        "title": "Lead, Localization Project Manager"
+      }]
+
+    // SELECT SVG FROM THE DOM 
+    const svg = d3.select("svg");
+    // PULL WITH AND HEIGHT
+    const width = +svg.attr("width");
+    const height = +svg.attr("height");
+
+    // NODE RADIUS MINMAX SETTINGS
+    const nodeRadius = {
+      min: 5,
+      max: 15
+    }
+
+    // NODE PADDING SETS SPACE BETWEEN NODES
+    const nodePadding = 5;
+    
+    // initialize radius scale with range, domain changes with data update
+    const radiusScale = d3.scaleLinear()
+      .range([nodeRadius.min, nodeRadius.max])
+
+
+    // same thing with colors
+    const colors = d3.scaleOrdinal(d3.schemeCategory20);
+    
+    // initialize the simulation 
+    const simulation = d3.forceSimulation()
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .on("tick", ticked);
+    
+
+    // THIS IS WHERE THINGS GET WEIRD
+
+    // pre-select for the node class
+    let node = svg.append('g').selectAll('.node');
+    
+    // create a transition
+    const t = d3.transition()
+      .duration(750);
+
+
+    // restart re-runs each time data is updated
+    function restart(nodes) {
+
+      // set radiusScale according to node score extents
+      radiusScale.domain(d3.extent(nodes, (x) => x.score))
+      
+      // get unique departments as array of strings
+      const departments = Object.keys(d3.nest().key((x) => x.department).entries(nodes));
+      
+      // set departments as color domain
+      colors.domain(departments);
+      
+      // bind the data
+      node = node.data(nodes);
+
+      // when data is removed from the dataset remove nodes
+      node.exit()
+        .transition(t)
+        .attr("r", 1e-6)
+        .remove();
+      
+      // on update, update scale and color
+      node
+        .transition(t)
+        .attr('r', (x) => radiusScale(x.score))
+        .style("fill", x => colors(x.department))
+      
+      //when new data is entered, add new nodes
+      node = node.enter().append("circle")
+        .attr('r', (x) => radiusScale(x.score))
+        .style("fill", x => colors(x.department))
+        .merge(node);
+
+      // Update and restart the simulation.
+      simulation.nodes(nodes)
+        .force("charge", d3.forceManyBody().strength(x => radiusScale(x.score)))
+        .force('collide', d3.forceCollide((x) => radiusScale(x.score) + nodePadding))
+        .alpha(1)
+        .restart();
+    }
+    
+    // run function for first time
+    restart(jsondata);
+
+    function ticked() {
+      // each tick, update center of x and y for circles according to simulation
+      node
+        .attr("cx", function (d) { return d.x; })
+        .attr("cy", function (d) { return d.y; });
+    }
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,533 @@
+<!-- Note:  All names and proprietary information have been redacted. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>WeCruit - Find Candidates within Your Company</title>
+
+    <!-- INTERNAL CSS FOR EXPEDIENCY -->
+    <style>
+      body {
+        font-family:karla;
+        text-align:center;
+      }
+
+      h1 {
+        font-family:karla;
+        font-size:7rem;
+        /* text-align:center; */
+        }
+
+      h3 {}
+
+      p {font-family:karla;
+          font-size:1rem;
+          text-align:center;}}
+      
+    </style>
+
+
+
+
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="static/js/jqBootstrapValidation.js"></script>
+    <script src="static/js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="static/js/freelancer.min.js"></script>
+    <!-- Bootstrap core CSS http://jsfiddle.net/pmrotule/w7aakdbb/ -->
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="static/vendor/bootstrap/css/custom.css" type="text/css" rel="stylesheet">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+  
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#multititle').multiselect({
+            nonSelectedText: 'Title Contains',
+            buttonWidth: '400px'
+        });
+        $('#multidept').multiselect({
+            nonSelectedText: 'Department Contains',
+            buttonWidth: '400px'
+        });
+        $('#multilocation').multiselect({
+            nonSelectedText: 'Location',
+            buttonWidth: '400px'
+        });
+    });
+      //save original variables
+      // var title = JSON.parse({{ title|tojson }});
+      // var description = JSON.parse({{ description|tojson }});
+      // var jsondata = JSON.parse({{ full_list|tojson }});
+      // console.log(jsondata);
+    </script>
+
+  </head>
+
+  <body id="page-top">
+
+
+
+    <!-- TITLE (TOP, LEFT JUSTIFIED) -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2 center-block">
+          <div class="container text-center" style="padding-top: .5rem;margin-left: -2rem;">               
+            <img src="static/img/logo_full.png" alt="placeholder-visualization" style="max-height: 6rem"> 
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="container-fluid d-flex justify-content-start" style="text-align: left; padding-top: 1rem; padding-bottom: 1rem; font-family:karla;">
+              <h1 style="font-size: 4rem; margin-left: -6rem;">{{ title }}</h1>
+          </div>      
+        </div>
+        <div class="col">
+          <div class="container d-flex justify-content-end" style="padding-top: 1rem;
+          padding-bottom: 1rem;">
+            <button type="button" onclick="download_csv()" class="btn btn-hover" style="width: 16rem; font-size: 1.5rem; font-family:karla;">Download Results</button>
+          </div>   
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- FILTER PANE -->
+    <div class="container-fluid">
+      <div class="row" style="padding-top: 1rem; padding-bottom: 1rem; text-align: center; font-family:karla;">
+
+
+        <div class="col-1">
+          <h4>Filters:</h4>
+        </div>
+
+        <div class="col">
+          <select id="multititle" multiple="multiple">
+              <option value="Associate">Associate</option>
+              <option value="Lead">Lead</option>
+              <option value="Senior">Senior</option>
+              <option value="Director">Director</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <select id="multidept" multiple="multiple">
+              <option value="Product">Product</option>
+              <option value="Sales">Sales</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Legal">Legal</option>
+              <option value="Community">Community</option>
+              <option value="People">People</option>
+              <option value="Technology">Technology</option>
+              <option value="Finance">Finance</option>
+              <option value="Other">Other</option>
+
+          </select>
+        </div>
+
+<!--         <div class="col-3">
+          <select id="multilocation" multiple="multiple">
+              <option value="NY">New York</option>
+              <option value="London">London</option>
+              <option value="San Francisco">San Francisco</option>
+              <option value="Tel Aviv">Tel Aviv</option>
+          </select>
+        </div> -->
+<!--         <div class="col-3">
+          <button type="submit" class="btn" value="submit">Run</button>
+        </div> -->
+      </div>
+    </div>
+
+
+
+    <!-- CANDIDATE LIST + VISUALIZATION COLUMNS -->
+    <div class="container-fluid" style="padding-top: 6rem; padding-bottom: 4rem; height: 45rem">
+      <div class="row">
+
+        <!-- LIST OF CANDIDATES -->
+        <div class="col-3" style="font-size: 2rem;">
+          <div class="container" style="padding-bottom: .5rem;">
+          <button type='button' class='btn btn-candidate-title employee-buttons-styling' style='width: 30rem; font-size: 1.5rem; font-family:karla; text-align: left;' data-container='body' data-toggle='popover' data-trigger='hover' data-placement='right' data-html='true'");>Recommended Candidates</button>
+          </div>
+          <div class="employee_buttons" id="employee_buttons"></div>
+        </div>
+
+        <!-- EMBEDDED VISUALIZATION OF CANDIDATES -->
+        <div class="col center-block">
+          <div class="container text-center">               
+            <!-- width="960" height="600" <img src="static/img/pan_viz1_placeholder.jpg" alt="placeholder-visualization" style="max-height: 35rem">  -->
+            <svg width="900" height="600"></svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="col-4 d-flex justify-content-start">
+        <a href="/">← Return to Search</a>
+      </div>
+    </div>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+
+  <script>
+    var jsondata = {{ full_list|tojson }};//JSON.parse({{ full_list|tojson }});
+    console.log(jsondata);
+    //console.log(jsondata)
+
+    // var jsondata = [
+    //   {
+    //     "department": "Interiors",
+    //     "id": "1000002279",
+    //     "location": "Chelsea",
+    //     "manager": "Name First Last",
+    //     "score": 0.6643142287202757,
+    //     "time_at_company": "2.0",
+    //     "title": "Lead, Interior Design"
+    //   }
+    // ]
+
+    // SELECT SVG FROM THE DOM 
+    const svg = d3.select("svg");
+
+    // Define the div for the tooltip
+    var div = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
+    // PULL WITH AND HEIGHT
+    const width = +svg.attr("width");
+    const height = +svg.attr("height");
+
+    //legend stuff:
+    var legendRectSize = 18;
+    var legendSpacing = 2; 
+
+    // NODE RADIUS MINMAX SETTINGS
+    const nodeRadius = {
+      min: 5,
+      max: 35
+    }
+
+    // NODE PADDING SETS SPACE BETWEEN NODES
+    const nodePadding = 10;
+    
+    // initialize radius scale with range, domain changes with data update
+    const radiusScale = d3.scaleLinear()
+      .range([nodeRadius.min, nodeRadius.max])
+
+
+    // same thing with colors
+    const colors = d3.scaleOrdinal(d3.schemeCategory20);
+    
+    // initialize the simulation 
+    const simulation = d3.forceSimulation()
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .on("tick", ticked);
+    
+
+    // THIS IS WHERE THINGS GET WEIRD
+
+    // pre-select for the node class
+    let node = svg.append('g').selectAll('.node');
+    
+    // create a transition
+    const t = d3.transition()
+      .duration(750);
+
+    function draw_buttons(jsondata) {
+        console.log('Im drawing buttons');
+        //reverse
+        var itemsToIterate = jsondata.slice(0).reverse();
+        var htmlarr = [];
+        console.log(itemsToIterate);
+
+        for (var i = 0, len = Math.min(8, itemsToIterate.length); i < len; i++) {
+            var item = itemsToIterate[i];
+            var n = (i+1).toString();
+            var title = item.title;
+            var time = item.time_at_company;
+            var manager = item.manager;
+            var id = item.id;
+            htmlarr.push("<div class='container' style='padding-bottom: .5rem;'>");
+            // htmlarr.push("<button type='button' class='btn btn-light btn-hover employee-buttons-styling' style='width: 30rem; font-size: 1.5rem; font-family:karla; text-align: left'>");
+            htmlarr.push("<button type='button' class='btn btn-hover employee-buttons-styling' style='width: 30rem; font-size: 1.5rem; font-family:karla; text-align: left' data-container='body' data-toggle='popover' data-trigger='hover' data-placement='right' data-html='true'");
+            htmlarr.push(" data-content='<h4>Employee ID:</h4><h5>"+id+"</h5><br><br><h4>Current Position:</h4><h5>"+title+"</h5><br><br><h4>Time at Your Company:</h4><h5>"+time+" years</h5><br><br><h4>Manager:</h4><h5>"+manager+"    &#9993;</h5>'>")
+            htmlarr.push("0"+n+" &nbsp; &nbsp; &nbsp;");
+            htmlarr.push(item.title);
+            htmlarr.push("</button></div>");
+        }
+        $(".employee_buttons").append(htmlarr.join(""));
+    }
+
+    function clear_buttons() {
+        $('.employee_buttons').empty();
+        //document.getElementById("employee_buttons").innerHTML = "";
+    }
+
+    function draw_legend(nodes) {
+
+      // get unique departments as array of strings
+      const departments = d3.nest().key((x) => x.department).entries(nodes).map(x => x.key);
+
+            // set departments as color domain
+      colors.domain(departments);
+      console.log(departments);
+
+      legend = d3.select("svg").append("g")
+          .attr("class", "legend")
+          .attr("width", width)
+          .attr("height", height)
+        .selectAll("g")
+          .data(colors.domain().slice().reverse())
+        .enter().append("g")
+          .attr("transform", function(d, i) { return "translate(780," + i * 20 + ")"; });
+
+      legend.append("rect")
+          .attr("width", 18)
+          .attr("height", 18)
+          .style("fill", colors);
+
+      legend.append("text")
+          .attr("x", 24)
+          .attr("y", 9)
+          .attr("dy", ".35em")
+          .text(function(d) { return d; });
+
+    }
+
+    // restart re-runs each time data is updated
+    function restart(nodes) {
+      
+
+      // set radiusScale according to node score extents
+      radiusScale.domain(d3.extent(nodes, (x) => x.scaling_score))
+      
+      // get unique departments as array of strings
+      const departments = d3.nest().key((x) => x.department).entries(nodes).map(x => x.key);
+      const departs = d3.nest().key((x) => x.department).entries(nodes)
+
+      // bind the data
+      node = node.data(nodes);
+
+      // when data is removed from the dataset remove nodes
+      node.exit()
+        .transition(t)
+        .attr("r", 1e-6)
+        .remove();
+      
+      // on update, update scale and color
+      node
+        .transition(t)
+        .attr('r', (x) => radiusScale(x.scaling_score))
+        .style("fill", x => colors(x.department))
+      
+      //when new data is entered, add new nodes
+      node = node.enter().append("circle")
+        .attr('r', (x) => radiusScale(x.scaling_score+.5))
+        .style("fill", x => colors(x.department))
+        .merge(node)
+        .on("mouseover", function(x) {    
+            div.transition()    
+                .duration(200)    
+                .style("opacity", .9);
+            div.html(x.title + "<br><br/> Score: " +x.score.toFixed(2).toString())  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");  
+            })          
+        .on("mouseout", function(x) {   
+            div.transition()    
+                .duration(500)    
+                .style("opacity", 0); 
+        })
+        .call(d3.drag()
+              .on("start", dragstarted)
+              .on("drag", dragged)
+              .on("end", dragended));
+
+      // Update and restart the simulation. Math.pow(x.score, 1.5)
+      simulation.nodes(nodes)
+        .force("charge", d3.forceManyBody().strength(x => radiusScale(x.scaling_score)))
+        .force('collide', d3.forceCollide((x) => radiusScale(x.scaling_score) + nodePadding))
+        .alpha(1)
+        .restart();
+
+    }
+
+
+    function dragstarted(d) {
+      if (!d3.event.active) simulation.alphaTarget(.03).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    function dragged(d) {
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+    }
+
+    function dragended(d) {
+      if (!d3.event.active) simulation.alphaTarget(.03);
+      d.fx = null;
+      d.fy = null;
+    }
+    
+    // run function for first time
+    draw_legend(jsondata);
+    restart(jsondata);
+    draw_buttons(jsondata);
+
+    function ticked() {
+      // each tick, update center of x and y for circles according to simulation
+      node
+        .attr("cx", function (d) { return d.x; })
+        .attr("cy", function (d) { return d.y; });
+    }
+
+    //department filter
+    $(function() {
+      $('#multidept').change(function(e) {
+          var newArray = [];
+          var selected = $(e.target).val();
+          console.dir(selected);
+
+          //loop through json data
+          for (var j = 0; j < jsondata.length; j++){
+            console.log(jsondata[j].department);
+            var string = jsondata[j].department;
+            //filter
+            if (new RegExp(selected.join("|")).test(string)) {
+                // At least one match
+                //console.log('MATCH')
+                newArray.push(jsondata[j]);
+            }
+          }
+          restart(newArray);
+          clear_buttons();
+          draw_buttons(newArray);
+
+        }); 
+    });
+
+    //title filter
+    $(function() {
+      $('#multititle').change(function(e) {
+          var newArray = [];
+          var selected = $(e.target).val();
+          console.dir(selected);
+          //loop through json data
+          for (var j = 0; j < jsondata.length; j++){
+            //console.log(jsondata[j].title);
+            var string = jsondata[j].title;
+            //filter
+            if (new RegExp(selected.join("|")).test(string)) {
+                // At least one match
+                //console.log('MATCH')
+                newArray.push(jsondata[j]);
+            }
+          }
+          restart(newArray);
+          clear_buttons();
+          draw_buttons(newArray);
+
+        }); 
+    });
+
+function convertArrayOfObjectsToCSV(args) {  
+        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+        data = args.data || null;
+        if (data == null || !data.length) {
+            return null;
+        }
+
+        columnDelimiter = args.columnDelimiter || ',';
+        lineDelimiter = args.lineDelimiter || '\n';
+
+        keys = Object.keys(data[0]);
+
+        result = '';
+        result += keys.join(columnDelimiter);
+        result += lineDelimiter;
+
+        data.forEach(function(item) {
+            ctr = 0;
+            keys.forEach(function(key) {
+                if (ctr > 0) result += columnDelimiter;
+
+                result += item[key];
+                ctr++;
+            });
+            result += lineDelimiter;
+        });
+
+        return result;
+    }
+
+function download_csv() {  
+        var data, filename, link;
+        var csv = convertArrayOfObjectsToCSV({
+            data: jsondata
+        });
+        if (csv == null) return;
+
+        filename = 'job_candidates.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    }
+  </script>
+
+
+
+  <script>
+      $(document).ready (function() {
+      $('[data-toggle="popover"]').popover()
+      container: 'body';        
+    });
+
+      $(document).on('change', function() {
+      $('[data-toggle="popover"]').popover()
+      container: 'body';        
+    });
+  </script>
+
+
+
+
+  </body>
+
+</html>
