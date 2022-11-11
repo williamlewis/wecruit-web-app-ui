@@ -5,7 +5,7 @@ Front-end web design of talent recruitment app for company data bootcamp using B
 
 </br>
 
-As part of a two-week company bootcamp, teams were asked to identify and solve a business problem by proposing a product that enables data visualization and improves access to information and insights.
+As part of a two-week bootcamp, teams were asked to identify and solve a business problem by proposing a product that enables data visualization and improves access to information and insights within the company.
 
 </br>
 
@@ -15,7 +15,7 @@ We spend ~$15.5 million in recruiting costs annually because upper level positio
 
 ### **Data Product Solution:**
 
-WeCruit, a play on "recruit", is a web app that surfaces the top 10 internal employees who best match a job description.  The app summarizes key information such as their company tenure and current people manager, enabling Talent Acquisition to quickly vet potential candidates.  In addition to knowledge retention, each internally sourced new hire can save ~$7k in recruiting costs.
+WeCruit, a play on "recruit", is a web app that surfaces the top 10 internal employees who best match a job description.  The app summarizes key information such as their company tenure and current people manager, enabling Talent Acquisition to quickly vet potential candidates.  In addition to knowledge retention, each internally sourced hire can save ~$7k in recruiting costs.
 
 
 
@@ -25,4 +25,6 @@ WeCruit, a play on "recruit", is a web app that surfaces the top 10 internal emp
 
 </br>
 
+<center>
 <img src="./images/logo.png" alt="WeCruit logo" width="50%" height="25.53%">
+</center>
